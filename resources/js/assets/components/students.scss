@@ -1,0 +1,23 @@
+.students {
+    .el-card__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            .el-input {
+                width: 300px;
+            }
+        }
+    }
+
+    .student-availability {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 3px;
+    }
+}
