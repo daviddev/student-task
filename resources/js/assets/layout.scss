@@ -1,0 +1,16 @@
+.app-sidebar {
+    position: fixed;
+    height: 100%;
+    width: 300px;
+
+    .el-menu-item {
+        display: flex;
+        align-items: center;
+    }
+
+    .user-name {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+}

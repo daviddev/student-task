@@ -1,0 +1,40 @@
+.sessions {
+    .el-card__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .actions {
+        display: flex;
+        align-items: center;
+
+        .el-select {
+            width: 300px;
+            margin-right: 10px;
+        }
+    }
+}
+
+.rate-session-modal {
+    width: 500px;
+
+    .el-rate {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.mx-datepicker {
+    width: 100%;
+}
+
+.mx-datepicker-main {
+    z-index: 99999;
+}
+
+.report-template-modal {
+    .ql-editor {
+        min-height: 400px;
+    }
+}

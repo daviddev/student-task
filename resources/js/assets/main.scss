@@ -1,0 +1,8 @@
+.main {
+    &.with-sidebar {
+        .main__content {
+            margin-left: 300px;
+            padding: 10px;
+        }
+    }
+}

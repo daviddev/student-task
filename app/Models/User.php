@@ -2,14 +2,27 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * @property int $id
+ * @property string $first_name
+ * @property string $last_name
+ * @property string $email
+ * @property string $report_template
+ * @property string $password
+ * @property string $remember_token
+ * @property Carbon $email_verified_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ */
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -17,9 +30,12 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
+        'report_template',
         'password',
+        'email_verified_at',
     ];
 
     /**
@@ -43,5 +59,33 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Prepare template.
+     *
+     * @return string
+     */
+    public function prepareTemplate(): string
+    {
+        $shortCodes = [
+            '@student_full_name',
+            '@session_date',
+            '@session_minutes',
+            '@session_start_time',
+            '@session_end_time',
+            '@target_start_date',
+            '@target_end_date',
+            '@target',
+            '@session_rating',
+        ];
+        $template = $this->report_template;
+
+        foreach ($shortCodes as $shortCode) {
+            $variable = str_replace('@', '$', $shortCode);
+            $template = str_replace($shortCode, "{{ $variable }}", $template);
+        }
+
+        return $template;
     }
 }
